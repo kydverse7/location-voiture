@@ -2,6 +2,9 @@ import { NextResponse } from 'next/server';
 import { connectDb } from '@/lib/db';
 import { Payment } from '@/models/Payment';
 import { Location } from '@/models/Location';
+import '@/models/Client';
+import '@/models/Vehicle';
+import '@/models/Reservation';
 import { getCurrentUser, requireRole } from '@/lib/auth';
 import { recordAudit } from '@/services/auditService';
 

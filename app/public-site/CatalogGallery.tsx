@@ -1,10 +1,12 @@
 "use client";
+/* eslint-disable @next/next/no-img-element */
 
 import { useState } from 'react';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
+import { cloudinaryBestQuality } from '@/lib/cloudinary';
 import { Fuel, Settings2, Eye, X, ChevronLeft, ChevronRight, ImageOff, Car } from 'lucide-react';
 
 type CatalogItem = {
@@ -86,7 +88,7 @@ export default function CatalogGallery({ catalog }: { catalog: CatalogItem[] }) 
                 {c.photos.length > 0 ? (
                   <>
                     <img
-                      src={c.photos[0]}
+                      src={cloudinaryBestQuality(c.photos[0])}
                       alt={c.modele}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                       onError={(e) => {
@@ -174,11 +176,11 @@ export default function CatalogGallery({ catalog }: { catalog: CatalogItem[] }) 
             </div>
 
             {/* Image */}
-            <div className="relative aspect-video bg-gradient-to-br from-royal-900 to-royal-950 flex items-center justify-center">
+            <div className="relative flex h-[70vh] items-center justify-center bg-gradient-to-br from-royal-900 to-royal-950 overflow-auto">
               <img
-                src={selectedVehicle.photos[currentPhotoIndex]}
+                src={cloudinaryBestQuality(selectedVehicle.photos[currentPhotoIndex])}
                 alt={`${selectedVehicle.modele} - Photo ${currentPhotoIndex + 1}`}
-                className="max-w-full max-h-full object-contain"
+                className="max-w-none max-h-none"
                 onError={(e) => {
                   (e.target as HTMLImageElement).src = 'https://via.placeholder.com/800x600?text=Photo+indisponible';
                 }}
@@ -220,7 +222,7 @@ export default function CatalogGallery({ catalog }: { catalog: CatalogItem[] }) 
                     }`}
                   >
                     <img
-                      src={photo}
+                      src={cloudinaryBestQuality(photo)}
                       alt={`Thumbnail ${index + 1}`}
                       className="h-full w-full object-cover"
                       onError={(e) => {

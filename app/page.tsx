@@ -21,15 +21,11 @@ import {
   CheckCircle2,
   Star,
   Play,
-  ChevronRight,
   Zap,
   Globe,
   Lock,
-  HeartHandshake,
-  Award,
   TrendingUp,
   MessageCircle,
-  ChevronDown,
   Menu,
   X
 } from 'lucide-react';
@@ -85,15 +81,11 @@ export default function LandingPage() {
     { name: 'Karim Tazi', role: 'Fondateur, FastRent Marrakech', text: 'Le ROI est incroyable. En 3 mois, on a réduit les impayés de 60% grâce aux alertes automatiques. Un investissement rentabilisé en quelques semaines.', avatar: 'KT' },
   ];
 
-  const pricingFeatures = [
-    'Véhicules illimités',
-    'Clients illimités',
-    'Contrats & factures PDF',
-    'Tableau de bord finances',
-    'Alertes maintenance',
-    'Site public personnalisé',
-    'Support prioritaire',
-    'Mises à jour gratuites',
+  const navItems = [
+    { label: 'Fonctionnalités', href: '#fonctionnalités' },
+    { label: 'Démo', href: '#demo' },
+    { label: 'Témoignages', href: '#témoignages' },
+    { label: 'Contact', href: '#contact' },
   ];
 
   return (
@@ -126,13 +118,13 @@ export default function LandingPage() {
 
           {/* Desktop Nav */}
           <nav className="hidden items-center gap-1 lg:flex">
-            {['Fonctionnalités', 'Tarifs', 'Témoignages', 'Contact'].map((item) => (
+            {navItems.map((item) => (
               <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
+                key={item.href}
+                href={item.href}
                 className="rounded-lg px-4 py-2 text-sm font-medium text-royal-700 transition-all hover:bg-royal-50 hover:text-royal-900"
               >
-                {item}
+                {item.label}
               </a>
             ))}
           </nav>
@@ -166,14 +158,14 @@ export default function LandingPage() {
         {mobileMenuOpen && (
           <div className="absolute left-0 right-0 top-full border-t border-royal-100 bg-white p-4 shadow-xl lg:hidden">
             <nav className="flex flex-col gap-2">
-              {['Fonctionnalités', 'Tarifs', 'Témoignages', 'Contact'].map((item) => (
+              {navItems.map((item) => (
                 <a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
+                  key={item.href}
+                  href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
                   className="rounded-lg px-4 py-3 text-sm font-medium text-royal-700 transition-all hover:bg-royal-50"
                 >
-                  {item}
+                  {item.label}
                 </a>
               ))}
               <Link href="/public-site" className="rounded-lg px-4 py-3 text-sm font-medium text-royal-700 hover:bg-royal-50">
@@ -494,57 +486,92 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section id="tarifs" className="bg-gradient-to-br from-royal-50 to-emerald-50 px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+      {/* Demo Section */}
+      <section id="demo" className="bg-gradient-to-br from-royal-50 to-emerald-50 px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="mb-16 text-center">
             <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-royal-200 bg-white px-4 py-2 text-sm font-medium text-royal-700">
-              <CreditCard className="h-4 w-4" />
-              Tarification Simple
+              <Play className="h-4 w-4" />
+              Démo
             </div>
             <h2 className="mb-4 text-3xl font-bold text-royal-900 sm:text-4xl">
-              Un prix, <span className="text-royal-500">tout inclus</span>
+              Découvrez AutoRent en <span className="text-royal-500">quelques minutes</span>
             </h2>
+            <p className="mx-auto max-w-2xl text-lg text-royal-600">
+              Un aperçu clair des modules clés : réservations, paiements, documents et maintenance.
+            </p>
           </div>
 
-          <div className="mx-auto max-w-lg">
-            <div className="relative overflow-hidden rounded-3xl border-2 border-royal-500 bg-white p-8 shadow-2xl shadow-royal-200/50 sm:p-10">
-              <div className="absolute -right-20 -top-20 h-40 w-40 rounded-full bg-gradient-to-br from-royal-100 to-emerald-100" />
-              <div className="absolute -bottom-20 -left-20 h-40 w-40 rounded-full bg-gradient-to-br from-emerald-100 to-royal-100" />
-              
+          <div className="grid items-start gap-8 lg:grid-cols-2 lg:gap-12">
+            <div className="space-y-4">
+              <div className="rounded-2xl border border-royal-100 bg-white p-6 shadow-lg">
+                <div className="mb-3 flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-royal-500 to-royal-600 text-white shadow-lg shadow-royal-500/30">
+                    <Lock className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="font-bold text-royal-900">1) Connectez-vous</p>
+                    <p className="text-sm text-royal-600">Accédez à l’espace pro et au tableau de bord.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-royal-100 bg-white p-6 shadow-lg">
+                <div className="mb-3 flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 text-white shadow-lg shadow-emerald-500/30">
+                    <Car className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="font-bold text-royal-900">2) Gérez la flotte</p>
+                    <p className="text-sm text-royal-600">Ajoutez véhicules, documents, photos et historique.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-royal-100 bg-white p-6 shadow-lg">
+                <div className="mb-3 flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 text-white shadow-lg shadow-amber-500/30">
+                    <FileText className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="font-bold text-royal-900">3) Automatisez</p>
+                    <p className="text-sm text-royal-600">Contrats PDF, paiements, alertes et suivi complet.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="relative overflow-hidden rounded-3xl border border-royal-200 bg-white p-8 shadow-2xl shadow-royal-200/50 sm:p-10">
+              <div className="absolute -right-24 -top-24 h-48 w-48 rounded-full bg-gradient-to-br from-royal-100 to-emerald-100" />
+              <div className="absolute -bottom-24 -left-24 h-48 w-48 rounded-full bg-gradient-to-br from-emerald-100 to-royal-100" />
+
               <div className="relative">
                 <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-royal-500 px-4 py-1 text-sm font-medium text-white">
                   <Sparkles className="h-4 w-4" />
-                  Offre de lancement
+                  Voir l’espace en action
                 </div>
 
-                <div className="mb-6">
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-5xl font-extrabold text-royal-900 sm:text-6xl">499</span>
-                    <span className="text-2xl font-bold text-royal-600">DH</span>
-                    <span className="text-royal-500">/mois</span>
-                  </div>
-                  <p className="mt-2 text-royal-600">Facturé annuellement • Essai gratuit 14 jours</p>
-                </div>
+                <p className="mb-6 text-royal-700">
+                  Accédez à l’espace pro pour explorer le dashboard, la gestion des réservations, les documents et la maintenance.
+                </p>
 
-                <div className="mb-8 space-y-4">
-                  {pricingFeatures.map((feature, i) => (
-                    <div key={i} className="flex items-center gap-3">
-                      <CheckCircle2 className="h-5 w-5 flex-shrink-0 text-emerald-500" />
-                      <span className="text-royal-700">{feature}</span>
-                    </div>
-                  ))}
+                <div className="flex flex-col gap-3">
+                  <Link href="/auth/login">
+                    <Button size="lg" glow className="w-full">
+                      Accéder à l'Espace Pro
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </Button>
+                  </Link>
+                  <a href="https://wa.me/212600000000" target="_blank" rel="noreferrer">
+                    <Button size="lg" variant="outline" className="w-full border-royal-200 text-royal-700 hover:bg-royal-50">
+                      <MessageCircle className="mr-2 h-5 w-5" />
+                      Demander une démo guidée
+                    </Button>
+                  </a>
                 </div>
-
-                <a href="https://wa.me/212600000000" target="_blank" rel="noreferrer">
-                  <Button size="lg" glow className="w-full">
-                    <MessageCircle className="mr-2 h-5 w-5" />
-                    Commencer l'essai gratuit
-                  </Button>
-                </a>
 
                 <p className="mt-4 text-center text-sm text-royal-500">
-                  Sans engagement • Annulation à tout moment
+                  Réponse rapide • Accompagnement inclus
                 </p>
               </div>
             </div>
@@ -612,7 +639,7 @@ export default function LandingPage() {
               <h4 className="mb-4 font-semibold text-white">Produit</h4>
               <ul className="space-y-3 text-royal-400">
                 <li><a href="#fonctionnalités" className="transition-colors hover:text-white">Fonctionnalités</a></li>
-                <li><a href="#tarifs" className="transition-colors hover:text-white">Tarifs</a></li>
+                <li><a href="#demo" className="transition-colors hover:text-white">Démo</a></li>
                 <li><Link href="/public-site" className="transition-colors hover:text-white">Catalogue</Link></li>
                 <li><Link href="/auth/login" className="transition-colors hover:text-white">Connexion</Link></li>
               </ul>

@@ -59,7 +59,7 @@ export default function PublicBookingForm({ vehicleId }: { vehicleId: string }) 
       
       setMessage('Demande de reservation envoyee ! Nous vous contacterons rapidement.');
       setFormData({ prenom: '', nom: '', telephone: '', debutAt: '', finAt: '' });
-    } catch (err) {
+    } catch {
       setError('Erreur de connexion');
     } finally {
       setIsSubmitting(false);

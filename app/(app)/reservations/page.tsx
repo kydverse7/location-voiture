@@ -666,20 +666,12 @@ export default function ReservationsPage() {
                           </>
                         )}
                         {r.statut === 'en_cours' && (
-                          <>
-                            <button onClick={() => handleEndLocation(r.id)} disabled={actionLoading === r.id}
-                              className="text-xs bg-slate-600 text-white px-2 py-1 rounded hover:bg-slate-700">
-                              Terminer location
-                            </button>
-                            {(r.paiementStatut === 'partiel' || r.paiementStatut === 'plus_tard') && (
-                              <button
-                                onClick={() => { setShowEncaissement(r); setEncaissementForm({ montant: r.montantRestant, type: 'especes' }); }}
-                                className="text-xs text-blue-600 hover:underline"
-                              >
-                                Encaisser
-                              </button>
-                            )}
-                          </>
+                          <span className="text-xs text-slate-500 italic">
+                            Location en cours
+                            <a href="/locations" className="block text-blue-600 hover:underline mt-1">
+                              → Voir les locations
+                            </a>
+                          </span>
                         )}
                         {r.statut === 'terminee' && (
                           <button onClick={() => handleDownloadInvoice(r)} className="text-xs text-blue-600 hover:underline">
@@ -760,8 +752,10 @@ export default function ReservationsPage() {
                         </>
                       )}
                       {r.statut === 'en_cours' && (
-                        <button onClick={() => handleEndLocation(r.id)} disabled={actionLoading === r.id}
-                          className="text-xs px-2 py-1 rounded bg-orange-50 text-orange-700 hover:bg-orange-100">Terminer</button>
+                        <span className="text-xs text-slate-500 italic">
+                          Location en cours
+                          <a href="/locations" className="block text-blue-600 hover:underline mt-1">→ Voir locations</a>
+                        </span>
                       )}
                       {r.paiementStatut === 'partiel' && (
                         <button onClick={() => { setShowEncaissement(r); setEncaissementForm({ montant: r.montantRestant, type: 'especes' }); }}

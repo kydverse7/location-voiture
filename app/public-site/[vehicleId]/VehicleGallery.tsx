@@ -1,6 +1,8 @@
 "use client";
+/* eslint-disable @next/next/no-img-element */
 
 import { useState } from 'react';
+import { cloudinaryBestQuality } from '@/lib/cloudinary';
 
 export default function VehicleGallery({ photos, modele }: { photos: string[]; modele: string }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -31,7 +33,7 @@ export default function VehicleGallery({ photos, modele }: { photos: string[]; m
       <div className="card overflow-hidden">
         {photos.length === 1 ? (
           <img
-            src={photos[0]}
+            src={cloudinaryBestQuality(photos[0])}
             alt={modele}
             className="w-full h-64 object-cover cursor-pointer hover:opacity-90 transition-opacity"
             onClick={() => openModal(0)}
@@ -44,7 +46,7 @@ export default function VehicleGallery({ photos, modele }: { photos: string[]; m
             {/* Image principale */}
             <div className="col-span-3 row-span-2">
               <img
-                src={photos[0]}
+                src={cloudinaryBestQuality(photos[0])}
                 alt={`${modele} - Photo 1`}
                 className="w-full h-64 object-cover cursor-pointer hover:opacity-90 transition-opacity"
                 onClick={() => openModal(0)}
@@ -57,7 +59,7 @@ export default function VehicleGallery({ photos, modele }: { photos: string[]; m
             {photos.slice(1, 5).map((photo, index) => (
               <div key={index} className="relative">
                 <img
-                  src={photo}
+                  src={cloudinaryBestQuality(photo)}
                   alt={`${modele} - Photo ${index + 2}`}
                   className="w-full h-[7.75rem] object-cover cursor-pointer hover:opacity-90 transition-opacity"
                   onClick={() => openModal(index + 1)}
@@ -87,7 +89,7 @@ export default function VehicleGallery({ photos, modele }: { photos: string[]; m
           onClick={closeModal}
         >
           <div
-            className="relative max-w-5xl w-full h-full flex flex-col"
+            className="relative w-full h-full max-w-none flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
@@ -104,11 +106,11 @@ export default function VehicleGallery({ photos, modele }: { photos: string[]; m
             </div>
 
             {/* Image */}
-            <div className="flex-1 flex items-center justify-center p-4 relative">
+            <div className="flex-1 flex items-center justify-center p-2 relative overflow-auto">
               <img
-                src={photos[currentIndex]}
+                src={cloudinaryBestQuality(photos[currentIndex])}
                 alt={`${modele} - Photo ${currentIndex + 1}`}
-                className="max-w-full max-h-full object-contain"
+                className="max-w-none max-h-none"
                 onError={(e) => {
                   (e.target as HTMLImageElement).src = 'https://via.placeholder.com/800x600?text=Photo+indisponible';
                 }}
@@ -148,7 +150,7 @@ export default function VehicleGallery({ photos, modele }: { photos: string[]; m
                   }`}
                 >
                   <img
-                    src={photo}
+                    src={cloudinaryBestQuality(photo)}
                     alt={`Thumbnail ${index + 1}`}
                     className="w-full h-full object-cover"
                     onError={(e) => {

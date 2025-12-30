@@ -14,6 +14,7 @@ const VehicleSchema = new Schema(
       enum: ['disponible', 'loue', 'reserve', 'maintenance'],
       default: 'disponible'
     },
+    backgroundPhoto: String,
     photos: [String],
     alerts: {
       vidangeAtKm: Number,

@@ -17,6 +17,10 @@ export async function POST(req: Request) {
     const { name, type } = await req.json();
     const presigned = await getPresignedUrl(name, type);
     if (presigned) return NextResponse.json(presigned);
+    return NextResponse.json(
+      { error: 'Upload presigned indisponible pour cette stratégie de stockage. Utilisez multipart/form-data.' },
+      { status: 400 }
+    );
   }
 
   const form = await req.formData();

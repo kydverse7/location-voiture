@@ -3,6 +3,8 @@ import { connectDb } from '@/lib/db';
 import { Reservation } from '@/models/Reservation';
 import { Location } from '@/models/Location';
 import { Vehicle } from '@/models/Vehicle';
+import { Payment } from '@/models/Payment';
+import '@/models/Client';
 import { getCurrentUser, requireRole } from '@/lib/auth';
 import { recordAudit } from '@/services/auditService';
 import { generateContractPdf, streamToBuffer } from '@/lib/pdf';
@@ -12,8 +14,26 @@ export async function GET() {
   const user = await getCurrentUser();
   requireRole(user, ['admin', 'agent']);
   await connectDb();
-  const locations = await Location.find().populate('vehicle client reservation').sort({ createdAt: -1 }).lean();
-  return NextResponse.json({ locations });
+  const locations = await Location.find()
+    .populate('vehicle client reservation paiements')
+    .sort({ createdAt: -1 })
+    .lean();
+
+  // Calculer le total payé et restant pour chaque location
+  const locationsWithPayments = locations.map((loc: any) => {
+    const totalPaye = (loc.paiements || [])
+      .filter((p: any) => p.statut === 'effectue')
+      .reduce((sum: number, p: any) => sum + (p.montant || 0), 0);
+    const montantRestant = (loc.montantTotal || 0) - totalPaye;
+    return {
+      ...loc,
+      totalPaye,
+      montantRestant,
+      paiementStatut: montantRestant <= 0 ? 'paye' : totalPaye > 0 ? 'partiel' : 'non_paye'
+    };
+  });
+
+  return NextResponse.json({ locations: locationsWithPayments });
 }
 
 export async function POST(req: Request) {
@@ -58,6 +78,19 @@ export async function POST(req: Request) {
     caution: reservation.caution,
     contratPdfUrl: pdfPath
   });
+
+  // Récupérer les paiements déjà effectués sur la réservation et les lier à la location
+  const existingPayments = await Payment.find({ reservation: reservation._id });
+  if (existingPayments.length > 0) {
+    const paymentIds = existingPayments.map(p => p._id);
+    // Mettre à jour les paiements pour les lier aussi à la location
+    await Payment.updateMany(
+      { reservation: reservation._id },
+      { $set: { location: created._id } }
+    );
+    // Ajouter les IDs de paiements à la location
+    await Location.findByIdAndUpdate(created._id, { $set: { paiements: paymentIds } });
+  }
 
   await Reservation.findByIdAndUpdate(reservation._id, { statut: 'en_cours', location: created._id, contratPdfUrl: pdfPath });
   await recordAudit(user!.id, 'location:start', 'Location', created._id.toString(), null, created);

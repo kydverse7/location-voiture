@@ -2,9 +2,10 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { connectDb } from '@/lib/db';
 import { Vehicle } from '@/models/Vehicle';
+import { cloudinaryBestQuality } from '@/lib/cloudinary';
 import { 
   Car, ArrowRight, Sparkles, ArrowLeft, Fuel, Users, Settings, MapPin, 
-  Filter, Star, Zap, Shield, Calendar, ChevronDown, Heart, Eye
+  Star, Zap, Shield, Calendar, Heart
 } from 'lucide-react';
 
 export const dynamic = 'force-dynamic';
@@ -183,7 +184,7 @@ export default async function CataloguePage() {
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
                   style={{ 
                     backgroundImage: vehicle.photos[0] 
-                      ? `url(${vehicle.photos[0]})` 
+                      ? `url(${cloudinaryBestQuality(vehicle.photos[0])})` 
                       : 'linear-gradient(135deg, #1a365d 0%, #0f172a 100%)'
                   }}
                 />

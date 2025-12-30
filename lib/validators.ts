@@ -10,6 +10,7 @@ export const vehicleSchema = z.object({
   kilometrage: z.number().int().nonnegative().default(0),
   statut: z.enum(['disponible', 'loue', 'reserve', 'maintenance']).optional(),
   photos: z.array(z.string()).optional(),
+  backgroundPhoto: z.string().optional(),
   alerts: z.object({
     vidangeAtKm: z.number().int().nonnegative().optional(),
     assuranceExpireLe: z.coerce.date().optional(),

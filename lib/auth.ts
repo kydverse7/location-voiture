@@ -54,7 +54,7 @@ export async function getCurrentUser() {
       role: (user as any).role,
       name: (user as any).name
     };
-  } catch (err) {
+  } catch {
     return null;
   }
 }

@@ -9,7 +9,6 @@ export async function GET() {
   await connectDb();
   
   const now = new Date();
-  const inOneWeek = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
   const inOneMonth = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
   
   // Récupérer les véhicules avec leurs alertes
