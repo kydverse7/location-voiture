@@ -5,7 +5,7 @@ import { Vehicle } from '@/models/Vehicle';
 import { cloudinaryBestQuality } from '@/lib/cloudinary';
 import { 
   Car, ArrowRight, Sparkles, ArrowLeft, Fuel, Users, Settings, MapPin, 
-  Star, Zap, Shield, Calendar, Heart
+  Star, Zap, Shield, Calendar, Heart, MessageCircle
 } from 'lucide-react';
 
 export const dynamic = 'force-dynamic';
@@ -294,6 +294,12 @@ export default async function CataloguePage() {
                 Notre équipe est disponible 7j/7 pour vous aider à trouver le véhicule parfait pour votre voyage.
               </p>
               <div className="flex flex-col justify-center gap-3 sm:flex-row sm:gap-4">
+                <a href="https://wa.me/212710685337" target="_blank" rel="noreferrer">
+                  <Button size="lg" className="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow-lg shadow-emerald-500/30 transition-all hover:from-emerald-400 hover:to-emerald-500 hover:shadow-xl sm:w-auto">
+                    <MessageCircle className="mr-2 h-5 w-5" />
+                    WhatsApp
+                  </Button>
+                </a>
                 <Link href="/#contact">
                   <Button size="lg" className="w-full bg-gradient-to-r from-royal-500 to-royal-600 text-white shadow-lg shadow-royal-500/30 transition-all hover:from-royal-400 hover:to-royal-500 hover:shadow-xl sm:w-auto">
                     <MapPin className="mr-2 h-5 w-5" />

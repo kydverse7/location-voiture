@@ -562,7 +562,7 @@ export default function LandingPage() {
                       <ArrowRight className="ml-2 h-5 w-5" />
                     </Button>
                   </Link>
-                  <a href="https://wa.me/212600000000" target="_blank" rel="noreferrer">
+                  <a href="https://wa.me/212710685337" target="_blank" rel="noreferrer">
                     <Button size="lg" variant="outline" className="w-full border-royal-200 text-royal-700 hover:bg-royal-50">
                       <MessageCircle className="mr-2 h-5 w-5" />
                       Demander une démo guidée
@@ -596,7 +596,7 @@ export default function LandingPage() {
                 Voir le Catalogue
               </Button>
             </Link>
-            <a href="https://wa.me/212600000000" target="_blank" rel="noreferrer">
+            <a href="https://wa.me/212710685337" target="_blank" rel="noreferrer">
               <Button size="lg" variant="outline" className="w-full border-white/30 text-white hover:bg-white/10 sm:w-auto">
                 <MessageCircle className="mr-2 h-5 w-5" />
                 Nous contacter
@@ -628,7 +628,7 @@ export default function LandingPage() {
                 <a href="#" className="flex h-10 w-10 items-center justify-center rounded-lg bg-royal-800 text-royal-400 transition-colors hover:bg-royal-700 hover:text-white">
                   <Globe className="h-5 w-5" />
                 </a>
-                <a href="https://wa.me/212600000000" className="flex h-10 w-10 items-center justify-center rounded-lg bg-royal-800 text-royal-400 transition-colors hover:bg-royal-700 hover:text-white">
+                <a href="https://wa.me/212710685337" className="flex h-10 w-10 items-center justify-center rounded-lg bg-royal-800 text-royal-400 transition-colors hover:bg-royal-700 hover:text-white">
                   <MessageCircle className="h-5 w-5" />
                 </a>
               </div>
